@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewBag.Title = "CustomerManager";
+}
+
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.delBtn',
+            function () {
+                var id = $(this).attr('id');
+                delCustomer(id);
+            });
+
+        $(document).on('click', '#createCustomerConfirmBtn', function () {
+
+            $detilModal = $('#createCustomerModal');
+            $detilModal.find('#CustomerName').val('');
+            $detilModal.find('#CellPhone1').val('');
+            $detilModal.find('#CellPhone2').val('');
+            $detilModal.find('#EmailAddress').val('');
+            $detilModal.find('#Address').val('');
+            $detilModal.find('#CIntroducedBy').val('');
+            $detilModal.find('#CRemainTickets').val('');
+            $('#CBirthday').val('');
+
+
+            var data = {
+                CustomerName: $detilModal.find('#CustomerName').val(),
+                CellPhone1: $detilModal.find('#CellPhone1').val(),
+                CellPhone2: $detilModal.find('#CellPhone2').val(),
+                EmailAddress: $detilModal.find('#EmailAddress').val(),
+                Address: $detilModal.find('#Address').val(),
+                IntroducedBy: $detilModal.find('#CIntroducedBy').val(),
+                RemainTickets: $detilModal.find('#CRemainTickets').val(),
+                Birthday: $('#CBirthday').val(),
+            };
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Content("~/Home/CreateCustomer")",
+                data: data,
+                success: function (res) {
+                    alert("success!!");
+                    $('#createCustomerModal').modal('hide');
+                },
+                error: function (xhr) {
+                    //顯示錯誤訊息
+                    alert(xhr.responseText);
+                }
+            });
+        });
+
+        $(document).on('click', '#modifyCustomerConfirmBtn', function () {
+         
+            $detilModal = $('#createCustomerModal');
+            var data = {
+                CustomerName: $detilModal.find('#CustomerName').val(),
+                CellPhone1: $detilModal.find('#CellPhone1').val(),
+                CellPhone2: $detilModal.find('#CellPhone2').val(),
+                EmailAddress: $detilModal.find('#EmailAddress').val(),
+                Address: $detilModal.find('#Address').val(),
+                IntroducedBy: $detilModal.find('#CIntroducedBy').val(),
+                RemainTickets: $detilModal.find('#CRemainTickets').val(),
+                Birthday: $('#CBirthday').val(),
+                ID: $detilModal.find('#CustomerNameID').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Content("~/Home/ModifyCustomer")",
+                data: data,
+                success: function (res) {
+                    alert("success!!");
+                    $('#createCustomerModal').modal('hide');
+                    $('#modifyCustomerConfirmBtn').text('新增').attr('id', 'createCustomerConfirmBtn');
+                },
+                error: function (xhr) {
+                    //顯示錯誤訊息
+                    alert(xhr.responseText);
+                }
+            });
+        });
+
+        $(document).on('click', '#cancelCustomerConfirmBtn', function () {
+            $('#modifyCustomerConfirmBtn').text('新增').attr('id', 'createCustomerConfirmBtn');
+        });
+
+     
+        $(document).on('click', '.modifyBtn',
+            function () {
+               
+                var resID = this.id;
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Content("~/Home/GetCustomerDetial")",
+                    data: 'id=' + this.id,
+                    success: function (res) {
+                      
+                        $detilModal = $('#createCustomerModal');
+                        $detilModal.find('#CustomerNameID').val(resID);
+                        $detilModal.find("#CustomerName").val(res['CustomerName']);
+                        $detilModal.find("#CellPhone1").val(res['CellPhone1']);
+                        $detilModal.find("#CellPhone2").val(res['CellPhone2']);
+                        $detilModal.find("#EmailAddress").val(res['EmailAddress']);
+                        $detilModal.find("#Address").val(res['Address']);
+                        $detilModal.find("#CBirthday").val(res['Birthday']);
+                        $detilModal.find("#CIntroducedBy").val(res['IntroducedBy']);
+                        $detilModal.find("#CRemainTickets").val(res['RemainTickets']);
+                       // $detilModal.find("#LastPayDate").val(res['LastPayDate']);
+                        $('#createCustomerConfirmBtn').text('修改').attr('id', 'modifyCustomerConfirmBtn');
+
+                        $detilModal.modal('show');
+                    },
+                    error: function (xhr) {
+                        //顯示錯誤訊息
+                        alert("出現問題啦!!" + xhr.responseText);
+                    }
+                });
+                //  $('#modifyReservationModal').modal('show');
+            });
+
+    });//End of ready
+
+    function delCustomer(id) {
+     //   alert(id);
+       // return;
+        var data = { DeleteId: id };
+        $.ajax({
+            url: "@Url.Content("~/Home/CustomerDelete")",
+            type: "post",
+            async: false,
+            data: 'id='+id,
+            success: function (result) {
+                //置換更新整個Html Table
+                $(".table.table-striped").fadeOut(100, function () {
+                    $(this).html(result);
+                    //  alert(data);
+                }).fadeIn(1000);
+            },
+            error: function (xhr) {
+                //顯示錯誤訊息
+                alert(xhr.responseText);
+            }
+        });
+    }
+
+</script>
+
+
+<br>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createCustomerModal">
+    新增顧客
+</button>
+
+<br>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+       
+        @Html.Partial("_CustomerList")
+
+    </table>
+</div>
+
+
+<!-- Create customer Modal -->
+<div class="modal fade" id="createCustomerModal" tabindex="-1" role="dialog" aria-labelledby="createCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="createCustomerModalLabel">輸入消費者資訊</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="checkCustomerName">輸入消費者名稱</label>
+                    <input type="text" class="form-control" id="CustomerName">
+                    <label id="usrTip"></label>
+                </div>
+                <div class="form-group">             
+                    <input type="hidden" class="form-control" id="CustomerNameID">
+                    <label id="usrTip"></label>
+                </div>
+                <div class="form-group">
+                    <label for="checkCustomerPhone">輸入消費者電話1</label>
+                    <input type="text" class="form-control" id="CellPhone1">
+                    <label id="usrTip"></label>
+                </div>
+                <div class="form-group">
+                    <label for="checkCustomerPhone">輸入消費者電話2</label>
+                    <input type="text" class="form-control" id="CellPhone2">
+                    <label id="usrTip"></label>
+                </div>
+                <div class="form-group">
+                    <label for="checkCustomerPhone">輸入電子郵件</label>
+                    <input type="text" class="form-control" id="EmailAddress">
+                    <label id="usrTip"></label>
+                </div>
+                <div class="form-group">
+                    <label for="checkCustomerPhone">住家地址件</label>
+                    <input type="text" class="form-control" id="Address">
+                    <label id="usrTip"></label>
+                </div>
+
+                <div class="form-group">
+                    <label for="checkCustomerPhone">介紹人</label>
+                    <input type="text" class="form-control" id="CIntroducedBy">
+                    <label id="usrTip"></label>
+                </div>
+
+                <div class="form-group">
+                    <label for="checkCustomerPhone">購買票卷</label>
+                    <input type="text" class="form-control" id="CRemainTickets">
+                    <label id="usrTip"></label>
+                </div>
+
+                <div class="form-group">
+                    <label for="checkCustomerPhone">生日</label>
+                    <div class="form-group">
+                        <div class='input-group date' id='birthdayDateTimepicker'>
+                            <input type='text' class="form-control" data-date-format="YYYY年MM月DD日 A h:mm" id="CBirthday" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelCustomerConfirmBtn" type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button id="createCustomerConfirmBtn" type="button" class="btn btn-primary">新增消費者</button>
+            </div>
+        </div>
+    </div>
+</div>
+

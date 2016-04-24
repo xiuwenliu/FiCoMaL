@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "_CustomerList";
+}
+
+<thead>
+    <tr>
+        <th>
+            顧客名字
+        </th>
+        <th>
+            電話1
+        </th>
+        <th>
+            電話2
+        </th>
+        <th>
+            電子郵件
+        </th>
+        <th>
+            地址
+        </th>
+        <th>
+            介紹人
+        </th>
+        <th>
+            上一次消費日
+        </th>
+        <th>
+            生日
+        </th>
+
+        <th>
+            功能
+        </th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var modelItem in this.Model)
+    {
+        <tr class="customerEntity" id="@modelItem.ID">
+            <td id="CustomerName">@modelItem.CustomerName</td>
+            <td id="CellPhone1">@modelItem.CellPhone1</td>
+            <td id="CellPhone2">@modelItem.CellPhone2</td>
+            <td id="EmailAddress">@modelItem.EmailAddress</td>
+            <td id="Address">@modelItem.Address</td>
+            <td id="IntroducedBy">@modelItem.IntroducedBy</td>
+            <td id="LastPayDate">@modelItem.LastPayDate</td>
+            <td id="Birthday">@modelItem.Birthday</td>
+            <td id="functionGroup">
+                <button id="@modelItem.ID" class="btn btn-info modifyBtn">修改</button>
+                <button id="@modelItem.ID" class="btn btn-danger delBtn">刪除</button>
+            </td>
+        </tr>
+    }
+</tbody>

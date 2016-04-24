@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE073D44-B729-48CF-A27F-E7C01733A38F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EqnestrianBooking</RootNamespace>
+    <AssemblyName>EqnestrianBooking</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\dwon.png" />
+    <Content Include="Content\images\p01.jpg" />
+    <Content Include="Content\images\p02.jpg" />
+    <Content Include="Content\images\p03.jpg" />
+    <Content Include="Content\images\p04.jpg" />
+    <Content Include="Content\vendor\bootstrap-datetimepicker.css" />
+    <Content Include="Content\vendor\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\vendor\bootstrap-theme.css" />
+    <Content Include="Content\vendor\bootstrap-theme.min.css" />
+    <Content Include="Content\vendor\bootstrap.css" />
+    <Content Include="Content\vendor\bootstrap.min.css" />
+    <Content Include="Content\images\cancelIcon.png" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\inProgressIcon.png" />
+    <Content Include="Content\images\loginBack.jpg" />
+    <Content Include="Content\vendor\rate.min.css" />
+    <Content Include="Content\sidebar.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\images\successIcon.png" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\trip.min.css" />
+    <Content Include="Content\images\trip_select.gif" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\vendor\bootstrap-theme.min.css.map" />
+    <Content Include="Content\vendor\bootstrap-theme.css.map" />
+    <Content Include="Content\vendor\bootstrap.min.css.map" />
+    <Content Include="Content\vendor\bootstrap.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\vendor\bootstrap-datetimepicker-build.less" />
+    <Content Include="Content\vendor\_bootstrap-datetimepicker.less" />
+    <None Include="Properties\PublishProfiles\clhy - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\clhy - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\EqnestrianBooking - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\EqnestrianBooking - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\EqnestrianBooking.pubxml" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Scripts\fullcalendar\gcal.js" />
+    <Content Include="Scripts\fullcalendar\lang-all.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-ma.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-sa.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar-tn.js" />
+    <Content Include="Scripts\fullcalendar\lang\ar.js" />
+    <Content Include="Scripts\fullcalendar\lang\bg.js" />
+    <Content Include="Scripts\fullcalendar\lang\ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\cs.js" />
+    <Content Include="Scripts\fullcalendar\lang\da.js" />
+    <Content Include="Scripts\fullcalendar\lang\de-at.js" />
+    <Content Include="Scripts\fullcalendar\lang\de.js" />
+    <Content Include="Scripts\fullcalendar\lang\el.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-au.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-gb.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-ie.js" />
+    <Content Include="Scripts\fullcalendar\lang\en-nz.js" />
+    <Content Include="Scripts\fullcalendar\lang\es.js" />
+    <Content Include="Scripts\fullcalendar\lang\fa.js" />
+    <Content Include="Scripts\fullcalendar\lang\fi.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr-ca.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr-ch.js" />
+    <Content Include="Scripts\fullcalendar\lang\fr.js" />
+    <Content Include="Scripts\fullcalendar\lang\he.js" />
+    <Content Include="Scripts\fullcalendar\lang\hi.js" />
+    <Content Include="Scripts\fullcalendar\lang\hr.js" />
+    <Content Include="Scripts\fullcalendar\lang\hu.js" />
+    <Content Include="Scripts\fullcalendar\lang\id.js" />
+    <Content Include="Scripts\fullcalendar\lang\is.js" />
+    <Content Include="Scripts\fullcalendar\lang\it.js" />
+    <Content Include="Scripts\fullcalendar\lang\ja.js" />
+    <Content Include="Scripts\fullcalendar\lang\ko.js" />
+    <Content Include="Scripts\fullcalendar\lang\lt.js" />
+    <Content Include="Scripts\fullcalendar\lang\lv.js" />
+    <Content Include="Scripts\fullcalendar\lang\nb.js" />
+    <Content Include="Scripts\fullcalendar\lang\nl.js" />
+    <Content Include="Scripts\fullcalendar\lang\pl.js" />
+    <Content Include="Scripts\fullcalendar\lang\pt-br.js" />
+    <Content Include="Scripts\fullcalendar\lang\pt.js" />
+    <Content Include="Scripts\fullcalendar\lang\ro.js" />
+    <Content Include="Scripts\fullcalendar\lang\ru.js" />
+    <Content Include="Scripts\fullcalendar\lang\sk.js" />
+    <Content Include="Scripts\fullcalendar\lang\sl.js" />
+    <Content Include="Scripts\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="Scripts\fullcalendar\lang\sr.js" />
+    <Content Include="Scripts\fullcalendar\lang\sv.js" />
+    <Content Include="Scripts\fullcalendar\lang\th.js" />
+    <Content Include="Scripts\fullcalendar\lang\tr.js" />
+    <Content Include="Scripts\fullcalendar\lang\uk.js" />
+    <Content Include="Scripts\fullcalendar\lang\vi.js" />
+    <Content Include="Scripts\fullcalendar\lang\zh-cn.js" />
+    <Content Include="Scripts\fullcalendar\lang\zh-tw.js" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_444444_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_555555_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_777620_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_777777_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Scripts\fullcalendar\lib\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\fullcalendar\lib\jquery.min.js" />
+    <Content Include="Scripts\fullcalendar\lib\moment.min.js" />
+    <None Include="Properties\PublishProfiles\netweb20160208082338 - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\netweb20160208082338 - FTP %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\netweb20160208082338 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\netweb20160208082338 - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.cookie-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.mousewheel.min.js" />
+    <Content Include="Scripts\jquery.rate.min.js" />
+    <Content Include="Scripts\loading_screen.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\plugin_helper.js" />
+    <Content Include="Scripts\Temp.js" />
+    <Content Include="Scripts\trip.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FishIndexController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogInController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604230804556_Add FishUpdateDate.cs" />
+    <Compile Include="Migrations\201604230804556_Add FishUpdateDate.Designer.cs">
+      <DependentUpon>201604230804556_Add FishUpdateDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604231227523_String.cs" />
+    <Compile Include="Migrations\201604231227523_String.Designer.cs">
+      <DependentUpon>201604231227523_String.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Breed.cs" />
+    <Compile Include="Models\Coach.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Horse.cs" />
+    <Compile Include="Models\FishUpdateData.cs" />
+    <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\SampleContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Shared\_ReservationList.cshtml" />
+    <Content Include="Views\Home\_List.cshtml" />
+    <Content Include="Views\LogIn\Index.cshtml" />
+    <Content Include="Views\Home\HourseManager.cshtml" />
+    <Content Include="Views\Home\CoachManager.cshtml" />
+    <Content Include="Views\Home\CustomerManager.cshtml" />
+    <Content Include="Views\Shared\_CustomerList.cshtml" />
+    <Content Include="Views\FishIndex\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604230804556_Add FishUpdateDate.resx">
+      <DependentUpon>201604230804556_Add FishUpdateDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604231227523_String.resx">
+      <DependentUpon>201604231227523_String.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>9605</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:9605/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

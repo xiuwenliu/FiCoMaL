@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "CoachManager";
+}
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    教練名稱
+                </th>
+                <th>
+                    教練手機
+                </th>
+                <th>
+                    功能
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var modelItem in this.Model)
+            {
+                <tr class="coachEntity" id="@modelItem.ID">
+                    <td id="CoachName">@modelItem.CoachName</td>
+                    <td id="CellPhone">@modelItem.CellPhone</td>
+                
+            <td id="functionGroup">
+                <button id="@modelItem.ID" class="btn btn-info modifyBtn">修改</button>
+                <button id="@modelItem.ID" class="btn btn-danger delBtn">刪除</button>
+            </td>
+        </tr>
+            }
+        </tbody>
+
+</table>
+</div>

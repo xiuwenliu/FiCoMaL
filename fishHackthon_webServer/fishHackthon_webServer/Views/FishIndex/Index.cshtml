@@ -1,0 +1,790 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>123</title>
+    <!--    匯入jQuery    -->
+   
+    <!--<script src="Scripts/jquery.mousewheel.min.js"></script>-->
+    <!-- Lightbox2 plugin for portfolio images -->
+   
+    <script>
+    $(document).ready(function() {
+
+        var baloon = $('#down');
+     function runIt() {
+       baloon.animate({width:'100px'}, 1000);
+       baloon.animate({width:'120px'}, 1000, runIt);
+    }
+    runIt();
+
+
+    var num_li = $("li.sider").length //偵測我們有幾個標點（圖片）
+
+    var state = 1;
+
+        //滾動滑鼠滾輪時，移動到上一頁、下一頁的效果
+        n = 1
+        moving = 0
+        $(window).mousewheel(function(e) {
+            $("html,body").stop()
+            if (moving == 0) {
+                moving = 1
+                if (e.deltaY == -1) {
+                    if (n < num_li) {
+                        n++
+                    }
+                } else {
+                    if (n > 1) {
+                        n--
+                    }
+                }
+            }
+            if (moving == 1) {
+                $("html,body").animate({
+                    "scrollTop": $(".p0" + n).offset().top
+                } , '5000', 'swing', function() {
+                    moving = 0
+                })
+               // console.log(n)
+            }
+        })
+
+
+        //根據捲軸的位置改變右方導覽列游標的顏色
+        $(window).scroll(function() {
+           // console.log($(window).scrollTop());
+
+            if ($(window).scrollTop() >= $(".p01").offset().top && $(window).scrollTop() < $(".p02").offset().top) {
+               // $('#p01Btn').fadeIn(3000);
+                //   console.log(123);
+                state = 1;
+                $(".myNav li").css("background-color", "white") //除了被點擊到的游標，其他都恢復成原來的顏色
+                $(".myNav li:eq(0)").css("background-color", "#ed8484")
+            } else if ($(window).scrollTop() >= $(".p02").offset().top && $(window).scrollTop() < $(".p03").offset().top) {
+                //$('#p01Btn').fadeOut();
+                state = 2;
+                $(".myNav li").css("background-color", "white") //除了被點擊到的游標，其他都恢復成原來的顏色
+                $(".myNav li:eq(1)").css("background-color", "#ed8484")
+            } else if ($(window).scrollTop() >= $(".p03").offset().top && $(window).scrollTop() < $(".p04").offset().top) {
+                state = 3;
+                charting();
+                $(".myNav li").css("background-color", "white") //除了被點擊到的游標，其他都恢復成原來的顏色
+                $(".myNav li:eq(2)").css("background-color", "#ed8484")
+            } else if ($(window).scrollTop() >= $(".p04").offset().top && $(window).scrollTop() < $(".p05").offset().top) {
+                state = 4;
+                $(".myNav li").css("background-color", "white") //除了被點擊到的游標，其他都恢復成原來的顏色
+                $(".myNav li:eq(3)").css("background-color", "#ed8484")
+            } else if ($(window).scrollTop() >= $(".p05").offset().top) {
+                state = 5;
+                $(".myNav li").css("background-color", "white") //除了被點擊到的游標，其他都恢復成原來的顏色
+                $(".myNav li:eq(4)").css("background-color", "#ed8484")
+            }
+        })
+
+        $('#down').click(
+            function () {
+                $("html,body").stop()       
+                $("html,body").animate({
+                    "scrollTop": $(".p02").offset().top
+                })
+            });
+
+        $('#to_p02').click(
+           function () {
+               $("html,body").stop()
+               $("html,body").animate({
+                   "scrollTop": $(".p02").offset().top
+               })
+           });
+
+        //點選右方導覽列時會到指定圖片
+        var num_li = $("li.sider").length
+        for (i = 0; i <= num_li; i++) {
+            $(".myNav li:eq(" + i + ")").click({
+                id: i
+            }, function(e) {
+                $("html,body").stop()
+                $(".myNav li").css("background-color", "white") //除了被點擊到的游標，其他都恢復成原來的顏色
+                page = e.data.id + 1
+                $("html,body").animate({
+                    "scrollTop": $(".p0" + page).offset().top
+                })
+                $(".myNav li:eq(" + e.data.id + ")").css("background-color", "#ed8484") //被點擊到的游標變色，前面的selector用this也可以
+            })
+        }
+        //一進入網頁時，將導覽列垂直置中計算導覽列置中的位置
+        center()
+
+        //縮放網頁時，將導覽列垂直置中
+        $(window).resize(function() {
+            center()
+        })
+
+        //計算導覽列垂直置中的高度
+        function center() {
+            pos = $(window).height() / 2 - $(".myNav").height() / 2
+            $(".myNav").css("top", pos)
+        }
+
+        pollingFishData();
+        
+        function pollingFishData() {
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Content("~/FishIndex/GetFishData")",
+                data: '',
+                success: function (res) {
+
+                    if (res['State'] == 'notRefresh')
+                        console.log("123");
+                    else {
+
+                        $detilModal = $('#container');
+
+                        var customerHistoryModalBody = $('#fishUpdateList');
+                        var all = '';
+                        customerHistoryModalBody.text('');
+                        all += ('<table><thead> <tr> <th>&nbsp;</th><th>&nbsp;</th> <th class="iron"><h2>魚種</h2></th><th class="iron"><h2>重量</h2></th><th class="iron"><h2>長度</h2></th><th class="iron"><h2>截圖</h2></th></tr></thead>');
+                        all += ('<tbody>');
+                        $.each(res, function (key, obj) {
+                            var row = '<tr>  <th>&nbsp;</th><th>&nbsp;</th> ';
+
+                            row += "<td class='iron'>" + '<h3>' + obj['FishID'] + '</h3>' + '</td>';
+                            row += "<td class='iron'>" + '<h3>' + obj['FishWeight'] + '公克' + '</h3>' + '</td>';
+                            row += "<td class='iron'>" + '<h3>' + obj['FishLength'] + '公分' + '</h3>' + '</td>';
+                            row += "<td class='iron'>" + "<img id='fishListImg' src='data:image/jpg;base64," + obj['FishImageData'] + "' alt='Red dot' width='100px'>" + '</td>';
+
+                            row += '</tr>';
+                            //customerHistoryModalBody.append(row);
+                            all += row;
+                            //if (++count === obj.length)
+                            //  customerHistoryModalBody.append('</tr>');
+                        });
+                        all += '</tbody></table>';
+                        customerHistoryModalBody.append(all);
+                    }
+
+                    setTimeout(pollingFishData, 3000);
+
+                    //alert(res);
+                    // $detilModal.find("#LastPayDate").val(res['LastPayDate']);
+
+
+                },
+                error: function (xhr) {
+                    //顯示錯誤訊息
+                    alert("出現問題啦!!" + xhr.responseText);
+                }
+            });
+        }
+
+  
+
+        Highcharts.createElement('link', {
+            href: '//fonts.googleapis.com/css?family=Unica+One',
+            rel: 'stylesheet',
+            type: 'text/css'
+        }, null, document.getElementsByTagName('head')[0]);
+
+        Highcharts.theme = {
+            colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+            chart: {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                    stops: [
+                        [0, '#2a2a2b'],
+                        [1, '#3e3e40']
+                    ]
+                },
+                style: {
+                    fontFamily: "'Unica One', sans-serif"
+                },
+                plotBorderColor: '#606063'
+            },
+            title: {
+                style: {
+                    color: '#E0E0E3',
+                    textTransform: 'uppercase',
+                    fontSize: '20px'
+                }
+            },
+            subtitle: {
+                style: {
+                    color: '#E0E0E3',
+                    textTransform: 'uppercase'
+                }
+            },
+            xAxis: {
+                gridLineColor: '#707073',
+                labels: {
+                    style: {
+                        color: '#E0E0E3'
+                    }
+                },
+                lineColor: '#707073',
+                minorGridLineColor: '#505053',
+                tickColor: '#707073',
+                title: {
+                    style: {
+                        color: '#A0A0A3'
+
+                    }
+                }
+            },
+            yAxis: {
+                gridLineColor: '#707073',
+                labels: {
+                    style: {
+                        color: '#E0E0E3'
+                    }
+                },
+                lineColor: '#707073',
+                minorGridLineColor: '#505053',
+                tickColor: '#707073',
+                tickWidth: 1,
+                title: {
+                    style: {
+                        color: '#A0A0A3'
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                style: {
+                    color: '#F0F0F0'
+                }
+            },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        color: '#B0B0B3'
+                    },
+                    marker: {
+                        lineColor: '#333'
+                    }
+                },
+                boxplot: {
+                    fillColor: '#505053'
+                },
+                candlestick: {
+                    lineColor: 'white'
+                },
+                errorbar: {
+                    color: 'white'
+                }
+            },
+            legend: {
+                itemStyle: {
+                    color: '#E0E0E3'
+                },
+                itemHoverStyle: {
+                    color: '#FFF'
+                },
+                itemHiddenStyle: {
+                    color: '#606063'
+                }
+            },
+            credits: {
+                style: {
+                    color: '#666'
+                }
+            },
+            labels: {
+                style: {
+                    color: '#707073'
+                }
+            },
+
+            drilldown: {
+                activeAxisLabelStyle: {
+                    color: '#F0F0F3'
+                },
+                activeDataLabelStyle: {
+                    color: '#F0F0F3'
+                }
+            },
+
+            navigation: {
+                buttonOptions: {
+                    symbolStroke: '#DDDDDD',
+                    theme: {
+                        fill: '#505053'
+                    }
+                }
+            },
+
+            // scroll charts
+            rangeSelector: {
+                buttonTheme: {
+                    fill: '#505053',
+                    stroke: '#000000',
+                    style: {
+                        color: '#CCC'
+                    },
+                    states: {
+                        hover: {
+                            fill: '#707073',
+                            stroke: '#000000',
+                            style: {
+                                color: 'white'
+                            }
+                        },
+                        select: {
+                            fill: '#000003',
+                            stroke: '#000000',
+                            style: {
+                                color: 'white'
+                            }
+                        }
+                    }
+                },
+                inputBoxBorderColor: '#505053',
+                inputStyle: {
+                    backgroundColor: '#333',
+                    color: 'silver'
+                },
+                labelStyle: {
+                    color: 'silver'
+                }
+            },
+
+            navigator: {
+                handles: {
+                    backgroundColor: '#666',
+                    borderColor: '#AAA'
+                },
+                outlineColor: '#CCC',
+                maskFill: 'rgba(255,255,255,0.1)',
+                series: {
+                    color: '#7798BF',
+                    lineColor: '#A6C7ED'
+                },
+                xAxis: {
+                    gridLineColor: '#505053'
+                }
+            },
+
+            scrollbar: {
+                barBackgroundColor: '#808083',
+                barBorderColor: '#808083',
+                buttonArrowColor: '#CCC',
+                buttonBackgroundColor: '#606063',
+                buttonBorderColor: '#606063',
+                rifleColor: '#FFF',
+                trackBackgroundColor: '#404043',
+                trackBorderColor: '#404043'
+            },
+
+            // special colors for some of the
+            legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+            background2: '#505053',
+            dataLabelsColor: '#B0B0B3',
+            textColor: '#C0C0C0',
+            contrastTextColor: '#F0F0F3',
+            maskColor: 'rgba(255,255,255,0.3)'
+        };
+
+        // Apply the theme
+        Highcharts.setOptions(Highcharts.theme);
+
+
+        function charting()
+        {
+            chart = new Highcharts.Chart({
+                chart: {
+                    //取得div容器的id
+                    renderTo: 'test',
+                    zoomType: 'xy',
+                    //折線圖
+                    type: 'line',
+                    //右方間距
+                    marginRight: 130,
+                    //下方間距
+                    marginBottom: 25
+                },
+                title: {
+                    text: '魚群每個月平均重量',
+                    x: -20 //位置至中
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                credits: {
+                    //隱藏官方連結
+                    enabled: false
+                },
+                xAxis: {
+                    //x軸的座標點
+                    categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+                },
+                yAxis: {
+                    title: {
+                        //Y軸表頭
+                        text: '重量'
+                    },
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                        this.x + ': ' + this.y + '°C';
+                    }
+                },
+                legend: {
+                    //由上至下
+                    layout: 'vertical',
+                    //靠左
+                    align: 'left',
+                    //從左上方為起點(0, 0)距離
+                    x: 120,
+                    y: 80,
+                    //靠上
+                    verticalAlign: 'top',
+                    floating: true,
+                    //框內背景顏色
+                    backgroundColor: '#FFFFFF'
+                },
+                series: [{
+                    name: '藍倒吊',
+                    data: [16.5, 17.3, 19.6, 23.0, 25.9, 27.9, 28.7, 28.2, 27.1, 24.6, 21.5, 17.8]
+                }, {
+                    name: '黃鰭鮪魚',
+                    data: [17.6, 18.5, 21.1, 24.5, 27.2, 28.5, 29.2, 28.8, 28.1, 26.1, 22.9, 19.1]
+                }, {
+                    name: '小丑魚',
+                    data: [19.2, 20.2, 22.5, 25.4, 27.5, 28.5, 29.2, 28.7, 28.1, 26.7, 24.0, 20.6]
+                }]
+            });
+        }
+
+       
+ 
+
+
+
+    })//end of ready
+    </script>
+    <style>
+   
+    /*    插入背景圖片    */
+      * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .p01 {
+        background-image: url(/Content/images/p01.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+
+    .p02 {
+        background-image: url(/Content/images/p02.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+
+    .p03 {
+        background-image: url(/Content/images/p03.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+
+    .p04 {
+        background-image: url(/Content/images/p04.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+
+    .p05 {
+      /*  background-image: url(images/p05.jpg);*/
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+    /*    插入導覽列     */
+
+    .myNav {
+        position: fixed;
+        top: 50%;
+        right: 0px;
+        cursor: pointer;
+        z-index:999999;
+        
+    }
+
+    li.sider{
+        width: 25px;
+        height: 25px;
+        margin: 10px;
+        /*background-image: url(images/1.png);*/
+        background-size: cover;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) inset, -1px -1px 1px rgba(0, 0, 0, 0.5) inset;
+        list-style-type: none;
+        opacity:0.7;
+    }
+
+    h1 {
+       /* font-size: 60px;
+        color: ghostwhite;
+        text-shadow: 0px 0px 10px black;*/
+    }
+
+    html ,body{
+    font-size: 0.8em;
+    font-family: Monaco, "微軟正黑體", Lato, Streetvertising, "Opificio Neue", "Blooming Grove Bold", "lucida grande", tahoma, verdana, arial, sans-serif;
+}
+h1, h2, h3, h4, h5 {
+    /*font-family: 'Lato', sans-serif;*/
+    color: white;
+    margin: 0;
+}
+h1 {
+    font-size: 5em;
+    line-height: 1em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 2.1em;
+    margin-bottom: 2.3em;
+}
+h3 {
+    font-size: 1.7em;
+    margin-bottom: 1em;
+}
+h4 {
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+}
+h5 {
+    font-size: 1.1em;
+    margin-bottom: 0.3em;
+}
+a, p, div, span, li, label, input, textarea {
+  /*  font-family: 'Arimo', sans-serif;*/
+    color: #777;
+    font-size: 1em;
+    line-height: 1.7em;
+}
+body {
+    line-height: 1.7em;
+}
+p {
+    margin-bottom: 20px;
+}
+a {
+    font-weight: bold;
+    text-decoration: none;
+}
+em {
+    background: #333;
+    color: white;
+    padding: 4px 6px;
+    line-height: 1.6;
+    border-radius: 3px;
+}
+b {
+    font-weight: bold;
+}
+i {
+    font-style: italic;
+}
+
+blockquote {
+    font-style: italic;
+    font-size: 1.2em;
+    margin: 30px 10%;
+    position: relative;
+}
+
+.fishs-info {
+   /* position: absolute;*/
+    text-align: center;
+    padding-left: 10%;
+    padding-top: 3%;
+}
+
+    table {
+	border-spacing: 10px 0px;
+}
+
+th, td {
+	text-align: center; padding: 10px;
+}
+
+.feature {
+	width: 183px; text-align: right;
+	font-size: 24px; font-weight: normal; color: #fff; 
+}
+
+.iron, .nightster, .fortyeight {
+	background: rgba(255,255,255,0.05);
+}
+
+#container {
+	width: 85% ;/*margin: -115px auto;*/ padding: 2% 2% 2% 2%;
+	background: url(images/bg-pattern.png);
+	box-shadow: 0px 0px 15px #000;
+}
+
+#fishUpdateList {
+    width: 85%/*margin: -115px auto;*/; padding: 2% 2% 2% 2%;
+	background: url(images/bg-pattern.png);
+    
+     
+	box-shadow: 0px 0px 15px #000;
+}
+
+#down {
+    position: absolute;
+    text-align: center;
+    top: 80%;
+    left: 47%;
+    width: 100px;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px #000;
+}
+
+#fishListImg {
+
+    box-shadow: 0px 0px 15px #000;
+
+}
+
+        #test {
+            opacity: 0.8;
+            padding-top: 15%;
+        }
+
+        .hello {
+   /* position: absolute;*/
+    text-align: center;
+   
+    padding-top: 20%;
+}
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="myNav">
+            <ul >
+                <li class="sider" style="background-color:#ed8484"></li>
+                <li class ="sider"></li>
+                <li class="sider"></li>
+                <li class="sider"></li>
+                
+            </ul>
+        </div>
+        <div class="p01">
+            <div class="hello">
+                <h1>歡迎來到FiCoMaL</h1>
+                <br/>
+                <br/>
+                <br/>
+                <h2>這裡是顯示漁獲資料的地方</h2>
+                
+            </div>
+            <img src="/Content/images/dwon.png" id="down" />
+            <!--<img src="/Content/images/dwon.png" id="to_p02" />-->
+            </div>
+        <div class="p02">
+            <div class="fishs-info">
+                <h1>近期上傳紀錄</h1>
+                <div id="fishUpdateList">
+                </div>
+            </div>
+           
+        </div>
+        <div class="p03">
+          
+            <div class="fishs-info">
+
+                <!-- Title -->
+                <h1>魚群統計</h1>
+                <!-- Subtitle -->
+                <!--  <h3>I am <em>John Doe</em> - web/UX designer</h3> -->
+                <!-- Text -->
+
+                <div id="container">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="iron"><h2>平均重量</h2></th>
+                                <th class="nightster"><h2>平均長度</h2></th>
+                                <th class="fortyeight"><h2>數量</h2></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="feature">藍倒吊</td>
+                                <td class="feature">183g</td>
+                                <td class="feature">20cm</td>
+                                <td class="feature" id="fish1Number">51</td>
+                            </tr>
+
+                            <tr>
+                                <td class="feature">黃鰭鮪魚</td>
+                                <td class="feature">2203g</td>
+                                <td class="feature">61cm</td>
+                                <td class="feature" id="fish2Number">32</td>
+                            </tr>
+
+                            <tr>
+                                <td class="feature">小丑魚</td>
+                                <td class="feature">123g</td>
+                                <td class="feature">12cm</td>
+                                <td class="feature" id="fish3Number">11</td>
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- Social icons. Href should hold webpage adress of your profile. Icon is determined by the class of span. To change the icon go to fontello icons folder and open demo.html and find your icon -->
+                <ul class="social-icons">
+                    <li> <a href=#> <span class="icon-linkedin-circled"></span> </a> </li>
+                    <li> <a href=#> <span class="icon-pinterest-circled"></span> </a> </li>
+                    <li> <a href=#> <span class="icon-flickr-circled"></span> </a> </li>
+                    <li> <a href=#> <span class="icon-twitter-circled"></span> </a> </li>
+                </ul>
+            </div>
+            </div>
+        <div class="p04">
+            <div class="fishs-info">
+                <h1>統計圖表</h1>
+            </div>
+            <div id="test"> </div>
+        </div>
+        <div class="p05"></div>
+       
+    </div>
+</body>
+
+</html>

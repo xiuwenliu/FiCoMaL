@@ -1,0 +1,149 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+   // max-width: 280px;
+}
+
+.modal-dialog {
+  //display: inline-block;
+  //text-align: left;
+  vertical-align: middle;
+}
+
+body, input, button, select, textarea{
+    font-family: 'Open Sans', Helvetica, Arial, "Source Han Sans TC", "Microsoft Jhenghei", sans-serif;
+    font-size: 150%;
+}
+
+.fc-event {
+    color: #404040;
+    border-radius:0px;
+    //font-size: %;
+}
+
+
+.progress { 
+    background-color: #222222;
+    color: #9d9d9d;
+    height: 200%;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+
+}
+.progress-bar { 
+    border-top: 1px solid rgb(160, 160, 160);
+    position: absolute;
+    top:50%;
+    width: 0%;
+}
+.progress-text {
+    font-family: "Menlo", "Consolas", monospace;
+    font-size: 24px;
+    margin-top: 10px;
+    position: absolute;
+    text-align: center;
+    top: 20%;
+    width: 100%;
+}
+.progress-complete .progress-bar {
+    border-top-color: rgb(255, 255, 255);
+}
+
+/*旁邊的教練列表*/
+#coach_list {
+	display: none;
+	position: absolute;
+    z-index:1000;    
+    background-color:#dedede;
+    /*text-align: center;*/
+    /*border-radius: 15px;*/
+    /*border: 2px solid #808080;*/
+    padding: 15px; 
+}
+
+#coach_list > label{
+}
+
+/*修改所有button的樣式*/
+.btn {
+    border-radius: 0px;
+}
+
+/*修改form control樣式*/
+.form-control {
+    border-radius: 0px;
+}
+
+/*修改彈出視窗的邊角*/
+.modal-content {
+  border-radius:0px;
+  opacity: .95;
+}
+
+/*修正scroll bar的問題*/
+.modal-body {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+.fc-event .fc-bg {
+    z-index: 1;
+    background: #fff;
+    opacity: .1;
+    filter: alpha(opacity=25);  
+}
+
+.fc th, .fc td {
+    font-family: 'Open Sans', Helvetica, Arial, "Source Han Sans TC", "Microsoft Jhenghei", sans-serif;
+}
+
+.fc-event {
+    box-shadow: 2px 2px #9d9d9d;
+}
+
+.sidebar.right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 270px;
+    background: #448AFF;
+}
+
+.sidebars > .sidebar {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.64);
+    position: fixed;
+    color: white;
+    padding: 30px;
+    font-size: 2em;
+    text-align: center;
+}
+
+/*modal發動時候的背景色*/
+.modal-backdrop {
+   background-color: white;
+}
+
+
+div .demo {
+    /*margin: 200px;*/
+}
+
+.tips {
+    position: fixed;
+    top: 10%;
+    right: 0px;
+    cursor: pointer;
+}

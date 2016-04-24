@@ -1,0 +1,46 @@
+﻿<thead>
+    <tr>
+       
+        <th>
+            顧客名稱
+        </th>
+        <th>
+            教練名稱
+        </th>
+        <th>
+            馬匹
+        </th>
+        <th>
+            是否付款
+        </th>
+        <th>
+            預約開始時間
+        </th>
+        <th>
+            預約結束時間
+        </th>
+        <th>
+            功能區
+        </th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var modelItem in this.Model)
+    {
+        <tr class="reservationEntity" id="@modelItem.ID">         
+            
+            <td id="Applicant">@modelItem.Applicant</td>
+            <td id="Coach">@modelItem.Coach</td>
+            <td id="Horse">@modelItem.Horse</td>
+            <td id="IsPaid">@modelItem.IsPaid</td>
+            <td id="StartDate">@modelItem.StartDate</td>
+            <td id="EndDate">@modelItem.EndDate</td>
+            <td id="functionGroup">
+                <button id="@modelItem.ID" class="btn btn-info modifyBtn">修改</button>
+                <button id="@modelItem.ID" class="btn btn-danger delBtn" >刪除</button>
+               
+            </td>
+        </tr>
+    }
+</tbody>
+

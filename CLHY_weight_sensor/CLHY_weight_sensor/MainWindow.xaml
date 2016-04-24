@@ -1,0 +1,20 @@
+﻿<Window x:Class="CLHY_weight_sensor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Weight Data Receiver" Height="137.382" Width="326.776" WindowStartupLocation="Manual" Background="#FF555555" WindowStyle="ToolWindow">
+    <Grid>
+        <Button x:Name="connectBtn" Content="Connect" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="90" Click="connectBtn_Click" Height="21" Background="#FF95C579" BorderBrush="#FF507852"/>
+        <ComboBox x:Name="comportCb" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FF619C61" Foreground="#FF6A2C2C">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                    <GradientStop Color="#FF87AE81" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <Label x:Name="weightLb" Content="Weight" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="284" FontSize="36" Foreground="#FFB1D375"/>
+        <Label x:Name="lengthLb" Content="Weight" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="120" FontSize="36"/>
+        <Label x:Name="catoLb" Content="Weight" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" Width="120" FontSize="36"/>
+
+    </Grid>
+</Window>

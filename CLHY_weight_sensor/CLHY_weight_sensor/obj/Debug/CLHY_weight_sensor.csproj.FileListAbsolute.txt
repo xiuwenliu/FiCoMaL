@@ -1,0 +1,13 @@
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\bin\Debug\CLHY_weight_sensor.exe.config
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\bin\Debug\CLHY_weight_sensor.exe
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\bin\Debug\CLHY_weight_sensor.pdb
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\CLHY_weight_sensor.csprojResolveAssemblyReference.cache
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\MainWindow.baml
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\MainWindow.g.cs
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\App.g.cs
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\CLHY_weight_sensor_MarkupCompile.cache
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\CLHY_weight_sensor.g.resources
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\CLHY_weight_sensor.Properties.Resources.resources
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\CLHY_weight_sensor.csproj.GenerateResource.Cache
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\CLHY_weight_sensor.exe
+c:\users\bealow\documents\visual studio 2013\Projects\CLHY_weight_sensor\CLHY_weight_sensor\obj\Debug\CLHY_weight_sensor.pdb

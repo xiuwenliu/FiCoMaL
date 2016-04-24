@@ -1,4 +1,4 @@
 # FiCoMaL
 Fishackathon
 
-Server Demo: https://clhy.hackpad.com/
+Server Demo: http://clhy.azurewebsites.net

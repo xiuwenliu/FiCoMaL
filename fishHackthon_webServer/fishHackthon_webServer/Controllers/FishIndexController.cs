@@ -19,8 +19,13 @@ namespace EqnestrianBooking.Controllers
 
         }
 
-        static int lastFishID;
+        public class AjaxState 
+        {
+            public string State { get; set; }
+        }
 
+        //加速用
+        static int lastFishID;
         // GET: FishIndex
         public ActionResult Index()
         {
@@ -32,14 +37,8 @@ namespace EqnestrianBooking.Controllers
             {1,"藍倒吊"},
             {2,"黃鰭鮪魚"},
             {3,"小丑魚"},
-            {4,"123魚"}
+            {4,"暫時"}
         };
-
-        //public ActionResult GetFishNumber() 
-       // {
-            //SampleContext sc = SampleContext.GetInstance();
-        
-        //}
 
         public ActionResult GetFishData() 
         {
@@ -51,8 +50,7 @@ namespace EqnestrianBooking.Controllers
                 return Json(new AjaxState() { State = "notRefresh" });
             }
             lastFishID = ApptListForDate.LastOrDefault().ID;
-
-       
+ 
             var eventList = (from e in ApptListForDate
                              orderby e.ID descending
                             select new

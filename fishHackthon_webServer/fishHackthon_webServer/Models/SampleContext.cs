@@ -15,12 +15,6 @@ namespace EqnestrianBooking.Models
     {
         
 
-        public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<Coach> Coachs { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Horse> Horses { get; set; }
-        public DbSet<Breed> Breeds { get; set; }
-
         public DbSet<FishUpdateData> FishUpdateDatas { get; set; }
 
         public static SampleContext Instance = null;
